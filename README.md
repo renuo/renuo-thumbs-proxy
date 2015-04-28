@@ -1,6 +1,6 @@
 # Renuo Thumbs Proxy
 
-## Installation and usage
+## Installation and Usage
 
 * Install pyenv
 * cp local_server.example.sh local_server.sh
@@ -20,6 +20,8 @@ THUMBOR_SECURITY_KEY=UJwHAZLsRejTyLI88lAriHL7xAXa6q0umiwwpPcP \
 * Make the images accessible (e.g. Cloudfront)
 ** From this step, you will get the BACKEND_ASSET_PATH, e.g. ao3ief5j.cloudfront.com
 * Generate a THUMBOR_SECURITY_KEY, configure thumbor
+* Transform images calling the right url (/thumb/<path:config>/u/<path:uri>)
+** Example: /thumb/200x300/smart/u/images/logo.png
 
 
 ## Config
