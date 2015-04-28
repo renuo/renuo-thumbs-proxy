@@ -1,5 +1,16 @@
 # Renuo Thumbs Proxy
 
+Renuo thumbs proxy is an app to sign images so they are processed by thumbor. You can restrict the source of the images by setting
+the BACKEND_IMAGES_PATH (e.g. ao3ief5j.cloudfront.com), so only images from this domain / path are processed by thumbor.
+
+## Deployment
+
+The app is ready to run on heroku. Create a new heroku app, set the env variables, and push the code to Heroku.
+
+### Performance / Requests per Second
+
+With the default heroku host (1 dyno for the proxy, 1 dyno for thumbor), about 20 rps are possible.
+
 ## Installation and Usage
 
 * Install pyenv
@@ -44,7 +55,7 @@ In thumbor this key is called SECURITY_KEY. See also: https://github.com/thumbor
 
 Generate it randomly, and keep it secret (only shared with the thumbor app).
 
-Examle: UJwHAZLsRejTyLI88lAriHL7xAXa6q0umiwwpPcP
+Example: UJwHAZLsRejTyLI88lAriHL7xAXa6q0umiwwpPcP
 
 ### BACKEND_IMAGES_PATH
 
@@ -74,3 +85,7 @@ Example: True
 * Use HTTPS everywhere
 * Have only one host to serve images which should be resized
 * Have one thumbor instance which resizes images
+
+## Renuo Thumbor
+
+See https://github.com/renuo/renuo-thumbor
