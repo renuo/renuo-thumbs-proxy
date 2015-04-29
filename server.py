@@ -23,11 +23,11 @@ def fetch_image(out_path):
     return Response(generate(), headers=headers)
 
 
-@app.route('/thumb/<path:config>/u/<path:uri>')
+@app.route('/t/<path:config>/u/<path:uri>')
 def serve_image(config, uri):
     key = os.environ['THUMBOR_SECURITY_KEY']
     image_path = os.environ['BACKEND_ASSET_PATH'] + '/' + uri
-    config_with_path = config + image_path
+    config_with_path = config + '/' + image_path
     mac = base64.urlsafe_b64encode(hmac.new(key.encode(), config_with_path.encode(), sha1).digest())
     out_path = 'https://' + os.environ['THUMBOR_PATH'] + '/' + mac.decode('utf-8') + '/' + config_with_path
     if app.debug:
