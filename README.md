@@ -13,7 +13,6 @@ With the default heroku host (1 dyno for the proxy, 1 dyno for thumbor), about 2
 
 ## Installation and Usage
 
-
 * Install [pyenv](https://github.com/yyuu/pyenv) and [pyenv-virtualenv](https://github.com/yyuu/pyenv-virtualenv)
 
 ```sh
