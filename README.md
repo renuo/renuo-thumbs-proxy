@@ -16,7 +16,7 @@ With the default heroku host (1 dyno for the proxy, 1 dyno for thumbor), about 2
 * Install [pyenv](https://github.com/yyuu/pyenv) and [pyenv-virtualenv](https://github.com/yyuu/pyenv-virtualenv)
 
 ```sh
-pyenv install
+pyenv install 3.4.3
 ```
 
 * Install virtualenvwrapper
@@ -34,7 +34,6 @@ Clone the project, setup virtualenv and install dependencies:
 git clone git@github.com:renuo/renuo-thumbs-proxy.git
 cd renuo-thumbs-proxy
 pyenv virtualenv 3.4.3 renuo-thumbs-proxy-3.4.3
-pyenv activate renuo-thumbs-proxy-3.4.3
 pip install -r requirements.txt
 pyenv rehash
 ```
