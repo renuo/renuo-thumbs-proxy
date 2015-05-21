@@ -13,13 +13,35 @@ With the default heroku host (1 dyno for the proxy, 1 dyno for thumbor), about 2
 
 ## Installation and Usage
 
-* Install pyenv
+* Install [pyenv](https://github.com/yyuu/pyenv) and [pyenv-virtualenv](https://github.com/yyuu/pyenv-virtualenv)
+
+```sh
+pyenv install 3.4.3
+```
+
+* Install virtualenvwrapper
+
+Make sure that this has been added to your environment (e.g. .zshrc):
+
+```sh
+eval "$(pyenv init - zsh)"
+eval "$(pyenv virtualenv-init -)"
+```
+
+Clone the project, setup virtualenv and install dependencies:
+
+```sh
+git clone git@github.com:renuo/renuo-thumbs-proxy.git
+cd renuo-thumbs-proxy
+pyenv virtualenv 3.4.3 renuo-thumbs-proxy-3.4.3
+pip install -r requirements.txt
+pyenv rehash
+```
+
 * cp local_server.example.sh local_server.sh
 * Adjust config for local_server.sh
 
 ```sh
-pyenv install
-pip install -r requirements.txt
 THUMBOR_SECURITY_KEY=UJwHAZLsRejTyLI88lAriHL7xAXa6q0umiwwpPcP \
  BACKEND_ASSET_PATH=ao3ief5j.cloudfront.com \
  THUMBOR_PATH=thumbor.example.com \
@@ -29,10 +51,10 @@ THUMBOR_SECURITY_KEY=UJwHAZLsRejTyLI88lAriHL7xAXa6q0umiwwpPcP \
 
 * Create a backend and upload images (e.g. S3)
 * Make the images accessible (e.g. Cloudfront)
-** From this step, you will get the BACKEND_ASSET_PATH, e.g. ao3ief5j.cloudfront.com
+  * From this step, you will get the BACKEND_ASSET_PATH, e.g. ao3ief5j.cloudfront.com
 * Generate a THUMBOR_SECURITY_KEY, configure thumbor
 * Transform images calling the right url (/thumb/<path:config>/u/<path:uri>)
-** Example: /thumb/200x300/smart/u/images/logo.png
+  * Example: /thumb/200x300/smart/u/images/logo.png
 
 
 ## Config
