@@ -37,6 +37,7 @@ cd renuo-thumbs-proxy
 pyenv virtualenv 3.4.3 renuo-thumbs-proxy-3.4.3
 pyenv activate renuo-thumbs-proxy-3.4.3
 pip install -r requirements.txt
+pyenv rehash
 ```
 
 * cp local_server.example.sh local_server.sh
