@@ -3,3 +3,4 @@ flask
 gunicorn
 Jinja2
 Werkzeug
+newrelic
