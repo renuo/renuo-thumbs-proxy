@@ -23,6 +23,11 @@ def fetch_image(out_path):
     return Response(generate(), headers=headers)
 
 
+@app.route('/healthcheck')
+def serve_image(config, uri):
+    return 'WORKING'
+
+
 @app.route('/t/<path:config>/u/<path:uri>')
 def serve_image(config, uri):
     key = os.environ['THUMBOR_SECURITY_KEY']
