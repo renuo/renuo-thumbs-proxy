@@ -24,7 +24,7 @@ def fetch_image(out_path):
 
 
 @app.route('/healthcheck')
-def serve_image(config, uri):
+def healthcheck(config, uri):
     return 'WORKING'
 
 
