@@ -5,22 +5,21 @@ import hmac
 import os
 import requests
 
-
 app = Flask(__name__)
 app.debug = os.getenv('DEBUG', '') == 'True'
 
 
-def fetch_image(out_path):
+def generate(r):
     chunk_size = 1024
+    for chunk in r.iter_content(chunk_size):
+        yield chunk
 
+
+def fetch_image(out_path):
     r = requests.get(out_path, stream=True, params=request.args)
     headers = dict(r.headers)
 
-    def generate():
-        for chunk in r.iter_content(chunk_size):
-            yield chunk
-
-    return Response(generate(), headers=headers)
+    return Response(generate(r), headers=headers, status=r.status_code)
 
 
 @app.route('/healthcheck')
@@ -43,4 +42,3 @@ def serve_image(config, uri):
 
 if __name__ == '__main__':
     app.run()
-
