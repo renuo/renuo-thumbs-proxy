@@ -20,7 +20,7 @@ def fetch_image(out_path):
         for chunk in r.iter_content(chunk_size):
             yield chunk
 
-    return Response(generate(), headers=headers)
+    return Response(generate(), headers=headers, status=r.status_code)
 
 
 @app.route('/healthcheck')
