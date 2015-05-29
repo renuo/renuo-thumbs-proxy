@@ -1,10 +1,12 @@
 from flask import Flask, Response, request
 from hashlib import sha1
+from raven.contrib.flask import Sentry
 import base64
 import hmac
 import os
 import requests
 
+sentry = Sentry(app)
 app = Flask(__name__)
 app.debug = os.getenv('DEBUG', '') == 'True'
 
