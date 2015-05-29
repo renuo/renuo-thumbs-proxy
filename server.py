@@ -28,6 +28,10 @@ def fetch_image(out_path):
 def healthcheck():
     return 'WORKING'
 
+@app.route('/sentrycheck')
+def sentrycheck():
+    1 /0
+
 
 @app.route('/t/<path:config>/u/<path:uri>')
 def serve_image(config, uri):
