@@ -8,7 +8,6 @@ import requests
 
 app = Flask(__name__)
 app.debug = os.getenv('DEBUG', '') == 'True'
-sentry = Sentry(app)
 
 
 def generate(r):
@@ -48,3 +47,4 @@ def serve_image(config, uri):
 
 if __name__ == '__main__':
     app.run()
+    sentry = Sentry(app)
