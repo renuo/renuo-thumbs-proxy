@@ -6,9 +6,10 @@ import hmac
 import os
 import requests
 
-sentry = Sentry(app)
+sentry = Sentry()
 app = Flask(__name__)
 app.debug = os.getenv('DEBUG', '') == 'True'
+sentry.init_app(app)
 
 
 def generate(r):
