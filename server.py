@@ -8,20 +8,19 @@ import requests
 
 app = Flask(__name__)
 app.debug = os.getenv('DEBUG', '') == 'True'
-
+if not app.debug:
+    Sentry(app)
 
 def generate(r):
     chunk_size = 1024
     for chunk in r.iter_content(chunk_size):
         yield chunk
 
-
 def fetch_image(out_path):
     r = requests.get(out_path, stream=True, params=request.args)
     headers = dict(r.headers)
 
     return Response(generate(r), headers=headers, status=r.status_code)
-
 
 @app.route('/healthcheck')
 def healthcheck():
@@ -30,7 +29,6 @@ def healthcheck():
 @app.route('/sentrycheck')
 def sentrycheck():
     1 /0
-
 
 @app.route('/t/<path:config>/u/<path:uri>')
 def serve_image(config, uri):
@@ -44,7 +42,5 @@ def serve_image(config, uri):
 
     return fetch_image(out_path)
 
-
 if __name__ == '__main__':
     app.run()
-    sentry = Sentry(app)

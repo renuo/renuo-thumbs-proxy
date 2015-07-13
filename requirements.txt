@@ -5,3 +5,5 @@ Jinja2
 Werkzeug
 newrelic
 raven
+blinker
+simplejson
