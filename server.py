@@ -6,10 +6,14 @@ import hmac
 import os
 import requests
 
-app = Flask(__name__)
-app.debug = os.getenv('DEBUG', '') == 'True'
-if not app.debug:
-    Sentry(app)
+def create_app():
+    app = Flask(__name__)
+    app.debug = os.getenv('DEBUG', '') == 'True'
+    if not app.debug:
+        sentry.init_app(app)
+    return app
+
+app = create_app()
 
 def generate(r):
     chunk_size = 1024
