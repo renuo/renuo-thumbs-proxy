@@ -10,6 +10,7 @@ def create_app():
     app = Flask(__name__)
     app.debug = os.getenv('DEBUG', '') == 'True'
     if not app.debug:
+        sentry = Sentry()
         sentry.init_app(app)
     return app
 
