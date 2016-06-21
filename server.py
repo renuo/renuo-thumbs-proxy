@@ -1,19 +1,25 @@
 from flask import Flask, Response, request
 from hashlib import sha1
+from raven.contrib.flask import Sentry
 import base64
 import hmac
 import os
 import requests
 
-app = Flask(__name__)
-app.debug = os.getenv('DEBUG', '') == 'True'
+def create_app():
+    app = Flask(__name__)
+    app.debug = os.getenv('DEBUG') == 'True'
+    if os.getenv('SENTRY_DSN'):
+        sentry = Sentry()
+        sentry.init_app(app)
+    return app
 
+app = create_app()
 
 def generate(r):
     chunk_size = 1024
     for chunk in r.iter_content(chunk_size):
         yield chunk
-
 
 def fetch_image(out_path):
     r = requests.get(out_path, stream=True, params=request.args)
@@ -21,11 +27,9 @@ def fetch_image(out_path):
 
     return Response(generate(r), headers=headers, status=r.status_code)
 
-
 @app.route('/healthcheck')
 def healthcheck():
     return 'WORKING'
-
 
 @app.route('/t/<path:config>/u/<path:uri>')
 def serve_image(config, uri):
@@ -38,7 +42,6 @@ def serve_image(config, uri):
         print('serving ' + out_path)
 
     return fetch_image(out_path)
-
 
 if __name__ == '__main__':
     app.run()
