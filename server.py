@@ -8,8 +8,8 @@ import requests
 
 def create_app():
     app = Flask(__name__)
-    app.debug = os.getenv('DEBUG', '') == 'True'
-    if os.getenv('SENTRY_DSN', ''):
+    app.debug = os.getenv('DEBUG') == 'True'
+    if os.getenv('SENTRY_DSN'):
         sentry = Sentry()
         sentry.init_app(app)
     return app
