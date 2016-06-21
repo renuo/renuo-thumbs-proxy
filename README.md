@@ -66,6 +66,7 @@ Example:
 ```
 THUMBOR_SECURITY_KEY=UJwHAZLsRejTyLI88lAriHL7xAXa6q0umiwwpPcP
 BACKEND_ASSET_PATH=ao3ief5j.cloudfront.com
+SENTRY_DSN= http://public:secret@example.com/1
 ```
 
 ### THUMBOR_SECURITY_KEY
@@ -95,6 +96,12 @@ Don't leave it blank. Don't use http:// or https:// in the path.
 This is the path to your thumbor server.
 
 Example: thumbor.example.com
+
+### SENTRY_DSN
+
+For monitoring the app, we use [Sentry](https://getsentry.com/).
+
+Example: http://public:secret@example.com/1
 
 ### DEBUG
 
