@@ -5,3 +5,4 @@ Jinja2
 Werkzeug
 newrelic
 raven[flask]
+simplejson
