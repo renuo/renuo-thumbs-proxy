@@ -4,4 +4,4 @@ gunicorn
 Jinja2
 Werkzeug
 newrelic
-raven
+raven[flask]
