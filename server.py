@@ -22,7 +22,8 @@ def generate(r):
         yield chunk
 
 def is_image(out_path):
-    return out_path.endswith('.jpg') or out_path.endswith('.jpeg') or out_path.endswith('.png') or out_path.endswith('.gif')
+    ext = out_path.split('.')[-1]
+    return ext in ['jpg', 'jpeg', 'png', 'gif']
 
 def fetch_image(out_path):
     r = requests.get(out_path, stream=True, params=request.args)
