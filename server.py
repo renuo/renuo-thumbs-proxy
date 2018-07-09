@@ -21,15 +21,31 @@ def generate(r):
     for chunk in r.iter_content(chunk_size):
         yield chunk
 
+def is_image(out_path):
+    ext = out_path.split('.')[-1]
+    return ext in ['jpg', 'jpeg', 'png', 'gif']
+
 def fetch_image(out_path):
     r = requests.get(out_path, stream=True, params=request.args)
     headers = dict(r.headers)
+
+    if headers['Content-Type']  == "binary/octet-stream" and is_image(out_path):
+            headers['Content-Type'] = "image/jpeg"
+    if app.debug:
+        print('serving with headers ' + str(headers))
 
     return Response(generate(r), headers=headers, status=r.status_code)
 
 @app.route('/healthcheck')
 def healthcheck():
     return 'WORKING'
+
+@app.route('/o/<path:uri>')
+def serve_image_replacing_images_mime_type(uri):
+    image_path = 'https://' + os.environ['BACKEND_ASSET_PATH'] + '/o/' + uri
+    if app.debug:
+            print('serving ' + image_path)
+    return fetch_image(image_path)
 
 @app.route('/t/<path:config>/u/<path:uri>')
 def serve_image(config, uri):
