@@ -22,18 +22,24 @@ def generate(r):
         yield chunk
 
 def is_image(out_path):
-    ext = out_path.split('.')[-1]
-    return ext in ['jpg', 'jpeg', 'png', 'gif']
+    return extension(out_path) in ['jpg', 'jpeg', 'png', 'gif']
+
+def extension(out_path):
+    return out_path.split('.')[-1]
+
+def mime_type_ending(out_path):
+    ext = extension(out_path)
+    if ext in ['jpg', 'jpeg']:
+        return 'jpeg'
+    return ext
 
 def fetch_image(out_path):
     r = requests.get(out_path, stream=True, params=request.args)
     headers = dict(r.headers)
-
     if is_image(out_path) and headers['content-type'] == "binary/octet-stream":
-            headers['content-type'] = "image/" + out_path.split('.')[-1]
+            headers['content-type'] = "image/" + mime_type_ending(out_path)
     if app.debug:
         print('serving with headers ' + str(headers))
-
     return Response(generate(r), headers=headers, status=r.status_code)
 
 @app.route('/healthcheck')
