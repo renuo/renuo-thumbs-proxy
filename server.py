@@ -28,7 +28,8 @@ def extension(out_path):
     return out_path.split('.')[-1]
 
 def mime_type_ending(out_path):
-    if extension(out_path) in ['jpg', 'jpeg']:
+    ext = extension(out_path)
+    if ext in ['jpg', 'jpeg']:
         return 'jpeg'
     return ext;
 
