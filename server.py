@@ -31,7 +31,7 @@ def mime_type_ending(out_path):
     ext = extension(out_path)
     if ext in ['jpg', 'jpeg']:
         return 'jpeg'
-    return ext;
+    return ext
 
 def fetch_image(out_path):
     r = requests.get(out_path, stream=True, params=request.args)
