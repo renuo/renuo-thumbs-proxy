@@ -25,7 +25,7 @@ def is_image(out_path):
     return extension(out_path) in ['jpg', 'jpeg', 'png', 'gif']
 
 def extension(out_path):
-    return out_path.split('.')[-1];
+    return out_path.split('.')[-1]
 
 def mime_type_ending(out_path):
     if extension(out_path) in ['jpg', 'jpeg']:
