@@ -29,8 +29,8 @@ def fetch_image(out_path):
     r = requests.get(out_path, stream=True, params=request.args)
     headers = dict(r.headers)
 
-    if headers['Content-Type']  == "binary/octet-stream" and is_image(out_path):
-            headers['Content-Type'] = "image/jpeg"
+    if is_image(out_path) and headers['content-type'] == "binary/octet-stream":
+            headers['content-type'] = "image/" + out_path.split('.')[-1]
     if app.debug:
         print('serving with headers ' + str(headers))
 
