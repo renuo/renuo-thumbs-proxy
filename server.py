@@ -36,8 +36,8 @@ def mime_type_ending(out_path):
 def fetch_image(out_path):
     r = requests.get(out_path, stream=True, params=request.args)
     headers = dict(r.headers)
-    if is_image(out_path) and headers['content-type'] == "binary/octet-stream":
-            headers['content-type'] = "image/" + mime_type_ending(out_path)
+    if is_image(out_path) and headers['Content-Type'] == "binary/octet-stream":
+            headers['Content-Type'] = "image/" + mime_type_ending(out_path)
     if app.debug:
         print('serving with headers ' + str(headers))
     return Response(generate(r), headers=headers, status=r.status_code)
