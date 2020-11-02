@@ -1,4 +1,5 @@
 from flask import Flask, Response, request
+from flask_cors import CORS
 from hashlib import sha1
 from raven.contrib.flask import Sentry
 import base64
@@ -8,6 +9,12 @@ import requests
 
 def create_app():
     app = Flask(__name__)
+    CORS(
+        app,
+        resources={
+            "/*": {"origins": ["http://localhost:8080", "https://lawoon.com", "https://kenspace.ch"]},
+        }
+    )
     app.debug = os.getenv('DEBUG') == 'True'
     if os.getenv('SENTRY_DSN'):
         sentry = Sentry()
