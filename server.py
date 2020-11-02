@@ -12,7 +12,7 @@ def create_app():
     CORS(
         app,
         resources={
-            "/*": {"origins": ["http://localhost:8080", "https://lawoon.com", "https://kenspace.ch"]},
+            r"/*": {"origins": ["http://localhost:8080", "https://lawoon.com", "https://kenspace.ch"]},
         }
     )
     app.debug = os.getenv('DEBUG') == 'True'
