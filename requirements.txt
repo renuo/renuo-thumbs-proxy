@@ -6,4 +6,3 @@ Werkzeug
 newrelic
 raven[flask]
 simplejson
-flask-cors
