@@ -1,5 +1,4 @@
 from flask import Flask, Response, request
-from flask_cors import CORS
 from hashlib import sha1
 from raven.contrib.flask import Sentry
 import base64
@@ -9,12 +8,6 @@ import requests
 
 def create_app():
     app = Flask(__name__)
-    CORS(
-        app,
-        resources={
-            r"/*": {"origins": ["http://localhost:8080", "https://lawoon.com", "https://kenspace.ch"]},
-        }
-    )
     app.debug = os.getenv('DEBUG') == 'True'
     if os.getenv('SENTRY_DSN'):
         sentry = Sentry()
@@ -22,6 +15,9 @@ def create_app():
     return app
 
 app = create_app()
+
+def lawoon_origin():
+    return 'lawoon-master'
 
 def generate(r):
     chunk_size = 1024
@@ -62,6 +58,8 @@ def serve_image_replacing_images_mime_type(uri):
 
 @app.route('/t/<path:config>/u/<path:uri>')
 def serve_image(config, uri):
+    if (lawoon_origin() in uri) == False:
+        return 'Invalid access', 403
     key = os.environ['THUMBOR_SECURITY_KEY']
     image_path = os.environ['BACKEND_ASSET_PATH'] + '/' + uri
     config_with_path = config + '/' + image_path
