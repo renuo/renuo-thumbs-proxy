@@ -17,7 +17,7 @@ def create_app():
 app = create_app()
 
 def lawoon_origin():
-    return 'lawoon-master'
+    return os.environ['LAWOON_ORIGIN']
 
 def generate(r):
     chunk_size = 1024
